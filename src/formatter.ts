@@ -142,7 +142,7 @@ const formatForward: IFormatter = (document, config) => {
     const isBraceNewline = config.get("brace.newline") as boolean;
     const isSpaceProperties = config.get("space.properties") as boolean;
     const isSpaceComment = config.get("space.comment") as boolean;
-    let isEscape = false;
+    let isLastSlash = false;
     let isInString = false;
     let indentCount = 0;
     let isAfterNonBraceIndent = false;
@@ -239,20 +239,20 @@ const formatForward: IFormatter = (document, config) => {
                 isAfterNonBraceIndent = true;
             } else {
                 // For other statements
+                isLastSlash = false;
+                isLastSpace = false;
                 for (let j = 0; j < text.length; j++) {
                     const ch = text[j];
-                    if (isEscape) {
-                        isEscape = false;
-                        continue;
-                    }
-                    if (ch === "\\") {
-                        isEscape = true;
-                    }
                     if (ch === '"') {
                         isInString = !isInString;
                     }
                     if (!isInString) {
-                        if (ch === "{") {
+                        if (ch === "/") {
+                            if (isLastSlash) {
+                                break;
+                            }
+                            isLastSlash = true;
+                        } else if (ch === "{") {
                             indentDelta++;
                         } else if (ch === "}") {
                             indentDelta--;
@@ -400,8 +400,9 @@ const formatForward: IFormatter = (document, config) => {
         // Case: //<SPACE>comment
         re = /\/\/(\s*)\S/dg;
         while ((match = re.exec(text)) && match.indices) {
-            let repStr = isSpaceComment ? " " : "";
-            result.rep(i, match.indices[1][0], match.indices[1][1], repStr);
+            if (isSpaceComment && match[1].length === 0) {
+                result.ins(i, match.indices[1][0], " ");
+            }
         }
 
         // Case: word<NO SPACE>;

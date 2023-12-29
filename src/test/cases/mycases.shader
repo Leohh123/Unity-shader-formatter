@@ -1,1 +1,7 @@
 float3 refDir=2*dot(-viewDir,i.normalWS)*i.normalWS+viewDir+[-1];
+//v2f vert(appdata v) {
+//     v2f o;
+//     o.positionCS = UnityObjectToClipPos(v.positionOS);
+//     o.uv = TRANSFORM_TEX(v.uv, _MainTex); // o.uv = v.uv * _MainTex_ST.xy + _MainTex_ST.zw;
+//     return o;
+// }
