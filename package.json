@@ -1,0 +1,94 @@
+{
+  "name": "unity-shader-formatter",
+  "displayName": "Unity Shader Formatter",
+  "description": "Code formatter for Unity shaders.",
+  "version": "0.0.1",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Formatters"
+  ],
+  "activationEvents": [
+    "workspaceContains:**/*.shader",
+    "workspaceContains:**/*.hlsl",
+    "onLanguage:UnityShader",
+    "onLanguage:shaderlab",
+    "onLanguage:hlsl"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "Unity Shader Formatter",
+      "properties": {
+        "unity-shader-formatter.indent.use-tabs": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use TABs for indentation."
+        },
+        "unity-shader-formatter.indent.size": {
+          "type": "integer",
+          "default": 4,
+          "description": "The length of the indent."
+        },
+        "unity-shader-formatter.indent.macro": {
+          "type": "boolean",
+          "default": true,
+          "description": "Indent macros."
+        },
+        "unity-shader-formatter.indent.if-macro": {
+          "type": "boolean",
+          "default": true,
+          "description": "Indent conditional macros."
+        },
+        "unity-shader-formatter.brace.newline": {
+          "type": "boolean",
+          "default": true,
+          "description": "Newline after braces."
+        },
+        "unity-shader-formatter.space.properties": {
+          "type": "boolean",
+          "default": true,
+          "description": "Add space after property names on declaration."
+        },
+        "unity-shader-formatter.space.comment": {
+          "type": "boolean",
+          "default": true,
+          "description": "Add space at the beginning of comments."
+        },
+        "unity-shader-formatter.completion.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Intellisense for shader code."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "unity-shader-formatter.activate",
+        "title": "Activate Unity shader formatter"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "yarn run compile && yarn run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3",
+    "@vscode/test-cli": "^0.0.4",
+    "@vscode/test-electron": "^2.3.8"
+  }
+}
