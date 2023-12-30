@@ -12,3 +12,4 @@ float3 refDir=2*dot(-viewDir,i.normalWS)*i.normalWS+viewDir+[-1];
 // #endif
 word//comment//comment
 _Shininess("Shininess Exponent",Float)=0
+fixed ndotl = saturate(dot(normalWS,-lightDir));
