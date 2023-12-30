@@ -5,3 +5,8 @@ float3 refDir = 2 * dot(-viewDir, i.normalWS) * i.normalWS + viewDir + [-1];
 //     o.uv = TRANSFORM_TEX(v.uv, _MainTex); // o.uv = v.uv * _MainTex_ST.xy + _MainTex_ST.zw;
 //     return o;
 // }
+// #ifndef HALF
+//     o.dif = _LightColor0 * saturate(dot(normalWS, _WorldSpaceLightPos0));
+// #else
+//     o.dif = _LightColor0 * (0.5 * saturate(dot(normalWS, _WorldSpaceLightPos0)) + 0.5);
+// #endif

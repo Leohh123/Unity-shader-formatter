@@ -226,10 +226,10 @@ const formatForward: IFormatter = (document, config) => {
             }
 
             // Non-brace indent trigger
-            if (
-                /(^|[^\w])((if)|(for)|(while))\s*\(.*\)\s*$/.test(text) ||
-                /(^|[^\w])((else)|(do))\s*$/.test(text)
-            ) {
+            const reWithPars =
+                /(?<!\/\/.*)(^|[^\w])((if)|(for)|(while))\s*\(.*\)\s*$/;
+            const reNoPars = /(?<!\/\/.*)(^|[^\w])((else)|(do))\s*$/;
+            if (reWithPars.test(text) || reNoPars.test(text)) {
                 lastAfterNonBraceIndentCount = afterNonBraceIndentCount;
                 lastAfterNonBraceIndentMax = afterNonBraceIndentMax;
 
