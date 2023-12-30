@@ -330,9 +330,10 @@ const formatForward: IFormatter = (document, config) => {
             result.ins(i, match.indices[1][0], " ");
         }
 
+        let reBase;
         // Case: word<SPACE><OPERATOR>
-        re =
-            /(?<!((\/\/)|").*)\S(((?<![\(\[+])\+(?!\+))|((?<![\(\[-])-(?!-))|[*%\^]|((?<!\/)\/(?!\/))|((?<!&)&)|((?<!\|)\|)|(<<)|(>>)|(!=)|((?<![!%&*+\-/<=>^|])=)|((?<=\(.*)(((?<!<)<)|((?<!>)>))))/dg;
+        reBase =
+            /(?<!\/\/.*)\S(((?<![\(\[+])\+(?!\+))|((?<![\(\[-])-(?!-))|[*%\^]|((?<!\/)\/(?!\/))|((?<!&)&)|((?<!\|)\|)|(<<)|(>>)|(!=)|((?<![!%&*+\-/<=>^|])=)|((?<=\(.*)(((?<!<)<)|((?<!>)>))))/dg;
         /**
          * Explanation:
          * Not after comments and not in strings
@@ -348,17 +349,22 @@ const formatForward: IFormatter = (document, config) => {
          * Operator< > could be added with space only in (), with sp-cases: 2ND< IN `<<` AND `Texture3D<float>`
          * Operator group end
          */
+        re = new RegExp(/(?<!".*)/.source + reBase.source, "dg");
         while ((match = re.exec(text)) && match.indices) {
-            result.ins(i, match.indices[3][0], " ");
+            result.ins(i, match.indices[1][0], " ");
+        }
+        re = new RegExp(reBase.source + /(?!.*")/.source, "dg");
+        while ((match = re.exec(text)) && match.indices) {
+            result.ins(i, match.indices[1][0], " ");
         }
         // Case: <OPERATOR><SPACE>word (not in strings)
-        re =
-            /(?<!((\/\/)|").*)(((((?<![!%&*+\-/<=>^|([]\s*)((\+(?!\+))|(-(?!-))))|[*%\^=]|((?<!\/)\/(?!\/))|(&(?!&))|(\|(?!\|))|(<(?!<))|(>(?!>)))(?!=)))\S/dg;
+        reBase =
+            /(?<!\/\/.*)(((((?<![!%&*+\-/<=>^|([]\s*)((\+(?!\+))|(-(?!-))))|[*%\^=]|((?<!\/)\/(?!\/))|(&(?!&))|(\|(?!\|))|(<(?!<))|(>(?!>)))(?!=)))\S/dg;
         /**
          * Explanation:
          * Not after comments and not in strings
          * There is trailing \S and operator group begin
-         * Operator+ with sp-cases: 1ST+ IN `i++` AND `x += +12 - (+34)` AND `x+1`
+         * Operator+ with sp-cases: 1ST+ IN `i++` AND `x += +12 - (+34)` AND (a, +b) AND `x+1`
          * Operator- same as above
          * Operator* % ^ = <= >= == != += -= *= /= %= &= |= ^= <<= >>= have no special cases (except `*=` case)
          * Operator/ with sp-cases: TWO/ IN `//comment`
@@ -370,8 +376,13 @@ const formatForward: IFormatter = (document, config) => {
          * Each of the above operators has a special case: `<OPERATOR>=`
          * Operator group end
          */
+        re = new RegExp(/(?<!".*)/.source + reBase.source, "dg");
         while ((match = re.exec(text)) && match.indices) {
-            result.ins(i, match.indices[3][1], " ");
+            result.ins(i, match.indices[1][1], " ");
+        }
+        re = new RegExp(reBase.source + /(?!.*")/.source, "dg");
+        while ((match = re.exec(text)) && match.indices) {
+            result.ins(i, match.indices[1][1], " ");
         }
 
         // Case: ,<SPACE>word
