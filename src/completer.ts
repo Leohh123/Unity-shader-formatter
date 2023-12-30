@@ -31,7 +31,7 @@ function completer(
     const config = vscode.workspace.getConfiguration("unity-shader.completion");
     const result: vscode.CompletionItem[] = [];
 
-    const isCompletionEnabled = config.get("completion.enable");
+    const isCompletionEnabled = config.get("enable");
 
     if (isCompletionEnabled) {
         // let info = `Completer line ${position.line}, character ${position.character}`;
@@ -90,7 +90,7 @@ function completer(
 
             // Completion
             const varName = matchCompletion[2];
-            console.log("match", varName);
+            // console.log("match", varName);
             const pair = vars.get(varName);
             if (pair) {
                 for (const attr of pair[0].attributes) {
