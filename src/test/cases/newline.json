@@ -1,9 +1,10 @@
 {
-    "brace.newline": true,
-    "indent.if-macro": true,
-    "indent.macro": true,
-    "indent.size": 4,
-    "indent.use-tabs": false,
-    "space.comment": true,
-    "space.properties": true
+    "completion.enable": true,
+    "format.brace.newline": true,
+    "format.indent.if-macro": true,
+    "format.indent.macro": true,
+    "format.indent.size": 4,
+    "format.indent.use-tabs": false,
+    "format.space.comment": true,
+    "format.space.properties": true
 }

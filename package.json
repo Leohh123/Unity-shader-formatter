@@ -1,14 +1,15 @@
 {
-  "name": "unity-shader-formatter",
-  "displayName": "Unity Shader Formatter",
-  "description": "Code formatter for Unity shaders.",
+  "name": "unity-shader",
+  "displayName": "Unity Shader",
+  "description": "Code formatting and intellisense for Unity shaders.",
   "version": "0.0.1",
   "license": "MIT",
   "engines": {
     "vscode": "^1.85.0"
   },
   "categories": [
-    "Formatters"
+    "Formatters",
+    "Programming Languages"
   ],
   "activationEvents": [
     "workspaceContains:**/*.shader",
@@ -21,44 +22,44 @@
   "contributes": {
     "configuration": {
       "type": "object",
-      "title": "Unity Shader Formatter",
+      "title": "Unity Shader",
       "properties": {
-        "unity-shader-formatter.indent.use-tabs": {
+        "unity-shader.format.indent.use-tabs": {
           "type": "boolean",
           "default": false,
           "description": "Use TABs for indentation."
         },
-        "unity-shader-formatter.indent.size": {
+        "unity-shader.format.indent.size": {
           "type": "integer",
           "default": 4,
           "description": "The length of the indent."
         },
-        "unity-shader-formatter.indent.macro": {
+        "unity-shader.format.indent.macro": {
           "type": "boolean",
           "default": true,
           "description": "Indent macros."
         },
-        "unity-shader-formatter.indent.if-macro": {
+        "unity-shader.format.indent.if-macro": {
           "type": "boolean",
           "default": true,
           "description": "Indent conditional macros."
         },
-        "unity-shader-formatter.brace.newline": {
+        "unity-shader.format.brace.newline": {
           "type": "boolean",
           "default": true,
           "description": "Newline after braces."
         },
-        "unity-shader-formatter.space.properties": {
+        "unity-shader.format.space.properties": {
           "type": "boolean",
           "default": true,
           "description": "Add space after property names on declaration."
         },
-        "unity-shader-formatter.space.comment": {
+        "unity-shader.format.space.comment": {
           "type": "boolean",
           "default": true,
           "description": "Add space at the beginning of comments."
         },
-        "unity-shader-formatter.completion.enable": {
+        "unity-shader.completion.enable": {
           "type": "boolean",
           "default": true,
           "description": "Intellisense for shader code."
@@ -67,8 +68,8 @@
     },
     "commands": [
       {
-        "command": "unity-shader-formatter.activate",
-        "title": "Activate Unity shader formatter"
+        "command": "unity-shader.activate",
+        "title": "Activate Unity Shader extension"
       }
     ]
   },

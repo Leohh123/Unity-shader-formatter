@@ -477,7 +477,7 @@ const formatBackward: IFormatter = (document, config) => {
 };
 
 function formatter(document: vscode.TextDocument): vscode.TextEdit[] {
-    const config = vscode.workspace.getConfiguration("unity-shader-formatter");
+    const config = vscode.workspace.getConfiguration("unity-shader.format");
     const result: Result = new Result();
 
     const formatters: IFormatter[] = [formatForward, formatBackward];

@@ -53,7 +53,7 @@ suite("Extension Test Suite", () => {
 
                 // Setup configuration
                 const currentConfig = vscode.workspace.getConfiguration(
-                    "unity-shader-formatter"
+                    "unity-shader"
                 );
                 for (let k in config) {
                     await currentConfig.update(k, config[k]);

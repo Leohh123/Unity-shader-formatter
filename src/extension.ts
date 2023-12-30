@@ -9,15 +9,15 @@ import completer from "./completer";
 export function activate(context: vscode.ExtensionContext) {
     // Use the console to output diagnostic information (console.log) and errors (console.error)
     // This line of code will only be executed once when your extension is activated
-    // console.log('Congratulations, your extension "shaderlabformatter" is now active!');
+    // console.log('Congratulations, your extension is now active!');
 
     const disposableActivateCommand = vscode.commands.registerCommand(
-        "unity-shader-formatter.activate",
+        "unity-shader.activate",
         () => {
             // The code you place here will be executed every time your command is executed
             // Display a message box to the user
             vscode.window.showInformationMessage(
-                "Successfully activated Unity shader formatter."
+                "Successfully activated Unity shader extension."
             );
         }
     );

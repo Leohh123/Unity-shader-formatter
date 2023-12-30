@@ -28,7 +28,7 @@ function completer(
     token: vscode.CancellationToken,
     context: vscode.CompletionContext
 ): vscode.CompletionItem[] {
-    const config = vscode.workspace.getConfiguration("unity-shader-formatter");
+    const config = vscode.workspace.getConfiguration("unity-shader.completion");
     const result: vscode.CompletionItem[] = [];
 
     const isCompletionEnabled = config.get("completion.enable");
