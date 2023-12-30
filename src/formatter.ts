@@ -397,11 +397,19 @@ const formatForward: IFormatter = (document, config) => {
             result.rep(i, match.indices[2][0], match.indices[2][1], repStr);
         }
 
-        // Case: //<SPACE>comment
-        re = /\/\/(\s*)\S/dg;
-        while ((match = re.exec(text)) && match.indices) {
-            if (isSpaceComment && match[1].length === 0) {
-                result.ins(i, match.indices[1][0], " ");
+        if (isSpaceComment) {
+            // Case: //<SPACE>comment
+            re = /(?<!\/\/.*)\/\/(\s*)\S/dg;
+            while ((match = re.exec(text)) && match.indices) {
+                if (match[1].length === 0) {
+                    result.ins(i, match.indices[1][0], " ");
+                }
+            }
+
+            // Case: word<SPACE>//comment
+            re = /(?<!\/\/.*)(\S)\/\/(\s*)\S/dg;
+            while ((match = re.exec(text)) && match.indices) {
+                result.ins(i, match.indices[1][0] + 1, " ");
             }
         }
 
