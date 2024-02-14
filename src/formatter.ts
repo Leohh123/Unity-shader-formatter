@@ -392,7 +392,7 @@ const formatForward: IFormatter = (document, config) => {
         }
 
         // Case: keyword<SPACE>() & function_name<NO SPACE>()
-        re = /(?<!_)(\w+)(\s*)\(/dg;
+        re = /(?<!".*)(?<!_)(\w+)(\s*)\((?!.*")/dg;
         while ((match = re.exec(text)) && match.indices) {
             let repStr = "";
             if (/(if)|(for)|(while)|(return)/.test(match[1])) {
