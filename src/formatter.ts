@@ -395,7 +395,7 @@ const formatForward: IFormatter = (document, config) => {
         re = /(?<!".*)(?<!_)(\w+)(\s*)\((?!.*")/dg;
         while ((match = re.exec(text)) && match.indices) {
             let repStr = "";
-            if (/(if)|(for)|(while)|(return)/.test(match[1])) {
+            if (/^((if)|(for)|(while)|(return))$/.test(match[1])) {
                 repStr = " ";
             }
             result.rep(i, match.indices[2][0], match.indices[2][1], repStr);

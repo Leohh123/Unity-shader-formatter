@@ -14,3 +14,4 @@ word//comment//comment
 _Shininess("Shininess Exponent",Float)=0
 fixed ndotl = saturate(dot(normalWS,-lightDir));
 _FaceColorMap ("Face color map (default white)", 2D) = "white" {}
+o.positionCS=TransformObjectToHClip   (v.positionOS);
